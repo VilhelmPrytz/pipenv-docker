@@ -7,13 +7,11 @@ services:
 
 script:
 - docker build --build-arg BASE_ARCH=$TRAVIS_CPU_ARCH -t prytz/pipenv:$TRAVIS_CPU_ARCH-latest .
-- docker manifest create prytz/pipenv:latest prytz/pipenv:$TRAVIS_CPU_ARCH-latest
-- docker manifest annotate --arch $TRAVIS_CPU_ARCH prytz/pipenv:latest prytz/pipenv:$TRAVIS_CPU_ARCH-latest
 
 deploy:
     skip_cleanup: true
     provider: script
-    script: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin && docker push prytz/pipenv:latest
+    script: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin && docker push prytz/pipenv:$TRAVIS_CPU_ARCH-latest
     on:
         branch: master
 
