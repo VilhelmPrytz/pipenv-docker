@@ -1,15 +1,16 @@
 
 services:
     - docker
-  
+
 script:
 - docker build -t prytz/pipenv:latest
+
 deploy:
-skip_cleanup: true
-provider: script
-script: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin && docker push prytz/pipenv:latest
-on:
-    branch: master
+    skip_cleanup: true
+    provider: script
+    script: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin && docker push prytz/pipenv:latest
+    on:
+        branch: master
 
 after_deploy:
 - rm -rf /home/travis/.docker/config.json
