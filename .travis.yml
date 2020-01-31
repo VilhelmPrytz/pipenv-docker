@@ -6,12 +6,12 @@ services:
     - docker
 
 script:
-- docker build -t prytz/pipenv:latest .
+- docker build -t prytz/pipenv:$TRAVIS_CPU_ARCH-latest .
 
 deploy:
     skip_cleanup: true
     provider: script
-    script: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin && docker push prytz/pipenv:latest
+    script: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin && docker push prytz/pipenv:$TRAVIS_CPU_ARCH-latest
     on:
         branch: master
 
