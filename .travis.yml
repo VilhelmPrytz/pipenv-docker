@@ -3,7 +3,7 @@ services:
     - docker
 
 script:
-- docker build -t prytz/pipenv:latest
+- docker build -t prytz/pipenv:latest .
 
 deploy:
     skip_cleanup: true
