@@ -6,7 +6,7 @@ services:
     - docker
 
 script:
-- docker build --build-arg BASE_ARCH=$TRAVIS_CPU_ARCH -t prytz/pipenv:$TRAVIS_CPU_ARCH-latest .
+- docker build -t prytz/pipenv:$TRAVIS_CPU_ARCH-latest .
 
 deploy:
     skip_cleanup: true
