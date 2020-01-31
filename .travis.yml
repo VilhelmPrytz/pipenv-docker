@@ -1,12 +1,14 @@
 arch:
     - amd64
-    - arm64
+    - armv7l
 
 services:
     - docker
 
 script:
-- docker build --build-arg BASE_ARCH=$TRAVIS_CPU_ARCH -t prytz/pipenv:latest .
+- docker build --build-arg BASE_ARCH=$TRAVIS_CPU_ARCH -t prytz/pipenv:$TRAVIS_CPU_ARCH-latest .
+- docker manifest create prytz/pipenv:latest prytz/pipenv:$TRAVIS_CPU_ARCH-latest
+- docker manifest annotate --arch $TRAVIS_CPU_ARCH prytz/pipenv:latest prytz/pipenv:$TRAVIS_CPU_ARCH-latest
 
 deploy:
     skip_cleanup: true
