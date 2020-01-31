@@ -1,6 +1,6 @@
 arch:
     - amd64
-    - armv7l
+    - arm64
 
 services:
     - docker
